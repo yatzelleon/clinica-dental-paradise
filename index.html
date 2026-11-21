@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clínica Dental Paradise – Sede Rímac | Dentista en el Rímac, Lima</title>
+<meta name="description" content="Clínica Dental Paradise Sede Rímac: ortodoncia, diseño de sonrisa, implantes y urgencias dentales. Atención hasta las 10 p.m. Av. Felipe Arancibia 701 (antes Av. Tarapacá).">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{fontFamily:{display:['"Plus Jakarta Sans"','system-ui','sans-serif'],sans:['Inter','system-ui','sans-serif']},colors:{brand:{DEFAULT:'#0D9488',dark:'#0F766E'},navy:{DEFAULT:'#0F172A',blue:'#1E3A8A'},wa:'#10B981'}}}}
+</script>
+<style>
+html,body{overflow-x:hidden;scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:#0F172A;background:#fff}
+h1,h2,h3,.font-display{font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+:focus-visible{outline:3px solid #0D9488;outline-offset:2px}
+.chip input:checked+span{background:#0D9488;color:#fff;border-color:#0D9488}
+.chip span{transition:all .15s}
+.need.active{border-color:#0D9488;background:#F0FDFA;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
+.img-fallback{background:linear-gradient(135deg,#0D9488,#1E3A8A);display:flex;align-items:center;justify-content:center;color:#fff;width:100%;height:100%;min-height:inherit}
+</style>
+</head>
+<body class="bg-white antialiased">
+
+<!-- Barra de estado en tiempo real -->
+<div id="statusBar" class="bg-navy text-white text-xs sm:text-sm text-center py-2 px-4">
+  <span id="statusDot" class="text-emerald-400">●</span> <span id="statusText">Verificando horario…</span>
+</div>
+
+<!-- Navbar -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="#inicio" class="flex items-center gap-2.5 min-w-0">
+      <span class="shrink-0 w-10 h-10 rounded-xl bg-brand text-white grid place-items-center"><i data-lucide="smile" class="w-6 h-6"></i></span>
+      <span class="leading-tight min-w-0">
+        <span class="block font-display font-extrabold text-sm sm:text-base text-navy truncate">CLÍNICA DENTAL PARADISE</span>
+        <span class="block text-[10px] sm:text-xs text-brand-dark font-semibold">SEDE RÍMAC · +10 AÑOS</span>
+      </span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-600">
+      <a class="hover:text-brand" href="#tratamientos">Tratamientos</a>
+      <a class="hover:text-brand" href="#respaldo">¿Por qué elegirnos?</a>
+      <a class="hover:text-brand" href="#resenas">Reseñas</a>
+      <a class="hover:text-brand" href="#ubicacion">Ubicación</a>
+      <a href="#agendar" class="bg-brand hover:bg-brand-dark text-white font-semibold px-5 py-2.5 rounded-full">Agendar Cita</a>
+    </nav>
+    <button id="menuBtn" class="lg:hidden w-11 h-11 grid place-items-center rounded-xl border border-slate-200" aria-label="Abrir menú" aria-expanded="false" aria-controls="drawer">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+  </div>
+</header>
+
+<!-- Cajón móvil -->
+<div id="drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true">
+  <div id="drawerBg" class="absolute inset-0 bg-navy/60"></div>
+  <aside class="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-white p-6 flex flex-col shadow-2xl">
+    <div class="flex justify-between items-center mb-6">
+      <span class="font-display font-extrabold text-navy">Menú</span>
+      <button id="closeBtn" class="w-11 h-11 grid place-items-center rounded-xl border border-slate-200" aria-label="Cerrar menú"><i data-lucide="x" class="w-6 h-6"></i></button>
+    </div>
+    <nav class="flex flex-col text-xl font-display font-bold text-navy">
+      <a class="drawer-link py-4 border-b border-slate-100" href="#tratamientos">Tratamientos</a>
+      <a class="drawer-link py-4 border-b border-slate-100" href="#respaldo">¿Por qué elegirnos?</a>
+      <a class="drawer-link py-4 border-b border-slate-100" href="#resenas">Reseñas</a>
+      <a class="drawer-link py-4 border-b border-slate-100" href="#ubicacion">Ubicación</a>
+    </nav>
+    <a href="https://wa.me/51989005627?text=Hola%20Cl%C3%ADnica%20Dental%20Paradise%20(Sede%20R%C3%ADmac)%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener" class="mt-auto min-h-[52px] bg-wa text-white font-bold rounded-full flex items-center justify-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i> Escribir por WhatsApp</a>
+  </aside>
+</div>
+
+<main id="inicio">
+<!-- Hero -->
+<section class="bg-gradient-to-b from-[#F0FDFA] to-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+    <div>
+      <span class="inline-flex items-center gap-1.5 bg-white border border-amber-200 text-navy text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-full">
+        <span class="text-amber-500">★</span> 4.8 EN GOOGLE (72 RESEÑAS) · +10 AÑOS Y 7 SEDES EN LIMA
+      </span>
+      <h1 class="mt-5 text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-[1.1] text-navy">Tecnología dental de última generación y calidez humana en el Rímac.</h1>
+      <p class="mt-5 text-base sm:text-lg text-slate-600 max-w-xl">Transformamos tu sonrisa con tratamientos seguros, sin dolor y personalizados. Visítanos en nuestra moderna sede de Av. Felipe Arancibia 701 (antes Av. Tarapacá) en horario extendido.</p>
+      <div class="mt-7 flex flex-col sm:flex-row gap-3">
+        <a href="#agendar" class="w-full sm:w-auto min-h-[48px] px-7 bg-wa hover:bg-emerald-600 text-white font-bold rounded-full inline-flex items-center justify-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i> Agendar Cita por WhatsApp</a>
+        <a href="#tratamientos" class="w-full sm:w-auto min-h-[48px] px-7 border-2 border-brand text-brand-dark font-bold rounded-full inline-flex items-center justify-center">Ver Tratamientos</a>
+      </div>
+      <ul class="mt-7 flex flex-wrap gap-2 text-sm text-slate-700">
+        <li class="bg-white border border-slate-200 rounded-full px-3 py-2 flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-brand"></i> Atención hasta las 10:00 p.m.</li>
+        <li class="bg-white border border-slate-200 rounded-full px-3 py-2 flex items-center gap-1.5"><i data-lucide="car" class="w-4 h-4 text-brand"></i> Estacionamiento gratuito</li>
+        <li class="bg-white border border-slate-200 rounded-full px-3 py-2 flex items-center gap-1.5"><i data-lucide="credit-card" class="w-4 h-4 text-brand"></i> Aceptamos todas las tarjetas y pagos NFC</li>
+      </ul>
+    </div>
+    <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-slate-100">
+      <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=75" alt="Consultorio dental moderno" class="w-full h-full object-cover" loading="eager">
+    </div>
+  </div>
+</section>
+
+<!-- Selector de necesidad -->
+<section class="py-14 sm:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy text-center">¿Qué necesitas hoy?</h2>
+    <p class="text-center text-slate-600 mt-2">Toca una opción y te decimos qué evaluación te conviene.</p>
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3" id="needGrid"></div>
+    <div id="needResult" class="hidden mt-6 max-w-3xl mx-auto bg-[#F0FDFA] border border-teal-200 rounded-2xl p-5 sm:p-6" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- Tratamientos -->
+<section id="tratamientos" class="py-14 sm:py-20 bg-[#F8FAFC] scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-4xl font-extrabold text-navy text-center">Especialidades y Tratamientos</h2>
+    <p class="text-center text-slate-600 mt-3 max-w-2xl mx-auto">Todo lo que tu sonrisa necesita, en un solo lugar y con atención personalizada.</p>
+    <div id="treatGrid" class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </div>
+</section>
+
+<!-- Agendador -->
+<section id="agendar" class="py-14 sm:py-20 bg-gradient-to-br from-[#0F766E] to-navy-blue text-white scroll-mt-16" style="background:linear-gradient(135deg,#0F766E,#1E3A8A)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-5 gap-10 items-start">
+    <div class="lg:col-span-2">
+      <h2 class="text-2xl sm:text-4xl font-extrabold">Agenda tu evaluación dental en 1 minuto</h2>
+      <p class="mt-4 text-teal-50">Elige lo que necesitas y te abrimos WhatsApp con tu mensaje ya escrito. Sin llamadas, sin esperas.</p>
+      <ul class="mt-6 space-y-3 text-sm">
+        <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 shrink-0 text-emerald-300"></i> Respuesta rápida de nuestro equipo</li>
+        <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 shrink-0 text-emerald-300"></i> Horario extendido, incluso domingos</li>
+        <li class="flex gap-2"><i data-lucide="check-circle-2" class="w-5 h-5 shrink-0 text-emerald-300"></i> Sin compromiso</li>
+      </ul>
+    </div>
+    <div class="lg:col-span-3 bg-white text-navy rounded-3xl p-5 sm:p-8 shadow-2xl">
+      <fieldset>
+        <legend class="font-bold text-sm mb-2">Tratamiento de interés</legend>
+        <div id="treatChips" class="flex flex-wrap gap-2"></div>
+      </fieldset>
+      <div class="mt-5">
+        <label for="sede" class="font-bold text-sm block mb-2">Sede</label>
+        <select id="sede" class="w-full min-h-[48px] rounded-xl border border-slate-300 px-3 bg-white">
+          <option>Sede Rímac (Av. Felipe Arancibia 701)</option>
+          <option>Sede Miraflores</option><option>Sede Independencia</option><option>Sede Los Olivos</option><option>Sede El Agustino</option>
+        </select>
+        <p class="text-xs text-slate-500 mt-1">Respaldo de 7 sedes en Lima. Te recomendamos la sede Rímac.</p>
+      </div>
+      <div class="mt-5 grid sm:grid-cols-2 gap-4">
+        <div>
+          <label for="dia" class="font-bold text-sm block mb-2">Día preferido</label>
+          <select id="dia" class="w-full min-h-[48px] rounded-xl border border-slate-300 px-3 bg-white">
+            <option>Lunes</option><option>Martes</option><option>Miércoles</option><option>Jueves</option><option>Viernes</option><option>Sábado</option><option>Domingo</option>
+          </select>
+        </div>
+        <div>
+          <label for="turno" class="font-bold text-sm block mb-2">Turno</label>
+          <select id="turno" class="w-full min-h-[48px] rounded-xl border border-slate-300 px-3 bg-white">
+            <option>Mañana (8:00 a.m. - 1:00 p.m.)</option>
+            <option>Tarde (2:00 p.m. - 6:00 p.m.)</option>
+            <option>Noche (6:00 p.m. - 10:00 p.m.)</option>
+          </select>
+        </div>
+      </div>
+      <p id="turnoNote" class="hidden mt-2 text-xs text-amber-700 bg-amber-50 rounded-lg p-2">Los domingos atendemos hasta las 7:00 p.m. Ajustamos tu turno a la tarde.</p>
+      <div class="mt-5">
+        <label for="nombre" class="font-bold text-sm block mb-2">Tu nombre</label>
+        <input id="nombre" type="text" autocomplete="name" placeholder="Ej. María Pérez" class="w-full min-h-[48px] rounded-xl border border-slate-300 px-3">
+        <p id="nameErr" class="hidden text-xs text-red-600 mt-1">Escribe tu nombre para que podamos atenderte.</p>
+      </div>
+      <button id="sendWa" type="button" class="mt-6 w-full min-h-[52px] bg-wa hover:bg-emerald-600 text-white font-bold rounded-full inline-flex items-center justify-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i> Agendar Cita por WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- Respaldo -->
+<section id="respaldo" class="py-14 sm:py-20 bg-white scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+      <div class="rounded-3xl overflow-hidden shadow-lg aspect-[4/3] bg-slate-100 order-2 lg:order-1">
+        <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&q=75" alt="Equipamiento odontológico moderno" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="order-1 lg:order-2">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-navy">El respaldo de Dental Paradise</h2>
+        <p class="mt-4 text-slate-600">Más de 10 años cuidando sonrisas en 7 sedes de Lima: Rímac, Miraflores, Independencia, Los Olivos, El Agustino y más. En el Rímac encuentras todo lo que hace tu visita más fácil.</p>
+      </div>
+    </div>
+    <div id="whyGrid" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </div>
+</section>
+
+<!-- Reseñas -->
+<section id="resenas" class="py-14 sm:py-20 bg-[#EFF6FF] scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-4xl font-extrabold text-navy text-center">Pacientes Felices en el Rímac</h2>
+    <p class="text-center text-slate-600 mt-3">4.8 <span class="text-amber-500">★★★★★</span> en Google · 72 reseñas</p>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <figure class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-amber-500 text-lg">★★★★★</div><blockquote class="mt-3 text-slate-700">“Tuve una excelente experiencia en la Clínica Dental Paradise. Instalaciones súper limpias, modernas y muy buena atención.”</blockquote><figcaption class="mt-4 text-sm font-semibold text-navy">Paciente verificado en Google</figcaption></figure>
+      <figure class="bg-white rounded-2xl p-6 shadow-sm"><div class="text-amber-500 text-lg">★★★★★</div><blockquote class="mt-3 text-slate-700">“Me encantó que atiendan hasta las 10 de la noche porque salgo tarde del trabajo. El doctor fue muy amable y me explicó todo.”</blockquote><figcaption class="mt-4 text-sm font-semibold text-navy">Paciente verificado en Google</figcaption></figure>
+      <figure class="bg-white rounded-2xl p-6 shadow-sm md:col-span-2 lg:col-span-1"><div class="text-amber-500 text-lg">★★★★★</div><blockquote class="mt-3 text-slate-700">“Excelente ubicación en la Av. Felipe Arancibia (ex Tarapacá), muy puntuales y con buenos precios.”</blockquote><figcaption class="mt-4 text-sm font-semibold text-navy">Paciente verificado en Google</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Ubicación -->
+<section id="ubicacion" class="py-14 sm:py-20 bg-white scroll-mt-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-start">
+    <div>
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-navy">Ubicación y horarios</h2>
+      <dl class="mt-6 space-y-5">
+        <div class="flex gap-3"><i data-lucide="map-pin" class="w-6 h-6 text-brand shrink-0"></i><div><dt class="font-bold">Dirección</dt><dd class="text-slate-600">Av. Felipe Arancibia 701 (antes Av. Tarapacá), Rímac 15093, Lima.</dd></div></div>
+        <div class="flex gap-3"><i data-lucide="clock" class="w-6 h-6 text-brand shrink-0"></i><div><dt class="font-bold">Horarios</dt><dd class="text-slate-600">Lunes a Sábado: 8:00 a.m. – 10:00 p.m.<br>Domingos: 8:00 a.m. – 7:00 p.m.</dd></div></div>
+        <div class="flex gap-3"><i data-lucide="phone" class="w-6 h-6 text-brand shrink-0"></i><div><dt class="font-bold">Teléfono / WhatsApp</dt><dd><a href="tel:+51989005627" class="text-brand-dark font-semibold">+51 989 005 627</a></dd></div></div>
+      </dl>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Felipe+Arancibia+701,+Rimac,+Lima" target="_blank" rel="noopener" class="mt-7 w-full sm:w-auto min-h-[48px] px-7 bg-navy text-white font-bold rounded-full inline-flex items-center justify-center gap-2"><i data-lucide="navigation" class="w-5 h-5"></i> Cómo llegar en Google Maps</a>
+    </div>
+    <div class="rounded-2xl overflow-hidden border border-slate-200">
+      <iframe title="Mapa Clínica Dental Paradise Rímac" class="w-full h-64 sm:h-80 block" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Av.+Felipe+Arancibia+701,+Rimac,+Lima&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="bg-navy text-slate-300 py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8 text-sm">
+    <div><p class="font-display font-extrabold text-white">CLÍNICA DENTAL PARADISE</p><p class="mt-2">Sede Rímac · Más de 10 años y 7 sedes en Lima.</p></div>
+    <div><p class="font-bold text-white">Contacto</p><p class="mt-2">Av. Felipe Arancibia 701 (antes Av. Tarapacá), Rímac 15093, Lima<br>+51 989 005 627</p></div>
+    <div><p class="font-bold text-white">Horarios</p><p class="mt-2">Lun–Sáb: 8:00 a.m. – 10:00 p.m.<br>Dom: 8:00 a.m. – 7:00 p.m.</p></div>
+  </div>
+  <p class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 text-xs text-slate-400">© <span id="yr"></span> Clínica Dental Paradise. Todos los derechos reservados.</p>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a id="floatWa" href="https://wa.me/51989005627?text=Hola%20Cl%C3%ADnica%20Dental%20Paradise%20(Sede%20R%C3%ADmac)%2C%20quisiera%20agendar%20una%20cita" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" class="fixed z-40 right-4 bottom-4 w-14 h-14 rounded-full bg-wa text-white grid place-items-center shadow-xl hover:scale-105 transition"><i data-lucide="message-circle" class="w-7 h-7"></i></a>
+
+<script>
+const WA = 'https://wa.me/51989005627?text=';
+const FALLBACK_ICONS = ['smile','stethoscope','sparkles'];
+
+/* Datos */
+const treatments = [
+  {i:'align-horizontal-distribute-center', t:'Ortodoncia y Brackets', d:'Alinea tu sonrisa con brackets metálicos, estéticos o autoligables con seguimiento mensual especializado.', k:'Ortodoncia (Brackets)'},
+  {i:'sparkles', t:'Odontología Estética y Diseño de Sonrisa', d:'Blanqueamiento dental clínico, carillas estéticas y resinas de alta naturalidad.', k:'Diseño de Sonrisa / Blanqueamiento'},
+  {i:'shield-check', t:'Implantes y Rehabilitación Oral', d:'Recupera la funcionalidad y estética de tus dientes con implantes seguros y prótesis a medida.', k:'Implantes / Rehabilitación'},
+  {i:'siren', t:'Urgencias Dentales y Sedación', d:'Atención rápida para dolor agudo, fracturas o infecciones, con opciones de sedación consciente para pacientes nerviosos.', k:'Urgencia Dental (Dolor)'},
+  {i:'baby', t:'Odontopediatría (Atención para Niños)', d:'Cuidado preventivo y curativo con paciencia, cariño y cero traumas desde la primera visita.', k:'Odontopediatría (Niños)'},
+  {i:'droplets', t:'Profilaxis, Curaciones y Endodoncia', d:'Limpieza profunda con ultrasonido, tratamiento de caries y salvamento de piezas dentales.', k:'Curaciones / Endodoncia'}
+];
+const chips = ['Limpieza / Profilaxis','Ortodoncia (Brackets)','Diseño de Sonrisa / Blanqueamiento','Implantes / Rehabilitación','Curaciones / Endodoncia','Odontopediatría (Niños)','Urgencia Dental (Dolor)'];
+const needs = [
+  {i:'siren', t:'Tengo dolor o urgencia', r:'Urgencia dental', d:'Te atendemos con prioridad para aliviar el dolor y encontrar la causa.', dur:'30 a 45 min', k:'Urgencia Dental (Dolor)'},
+  {i:'align-horizontal-distribute-center', t:'Quiero alinear mis dientes', r:'Evaluación de ortodoncia', d:'Revisamos tu mordida y te explicamos qué tipo de brackets te conviene.', dur:'30 a 40 min', k:'Ortodoncia (Brackets)'},
+  {i:'sparkles', t:'Busco una sonrisa más blanca', r:'Blanqueamiento y diseño de sonrisa', d:'Evaluamos tus dientes y planificamos el blanqueamiento o las carillas ideales.', dur:'30 a 45 min', k:'Diseño de Sonrisa / Blanqueamiento'},
+  {i:'stethoscope', t:'Chequeo o limpieza general', r:'Limpieza con ultrasonido y revisión', d:'Limpieza profunda y revisión completa para prevenir caries y problemas de encías.', dur:'40 a 60 min', k:'Limpieza / Profilaxis'}
+];
+const why = [
+  {i:'car', t:'Estacionamiento gratuito', d:'En el local y en calle, para que llegues sin complicarte.'},
+  {i:'users', t:'Ambientes amplios y seguros', d:'Espacio inclusivo y amigable para toda la familia.'},
+  {i:'cpu', t:'Equipos modernos', d:'Tecnología actual para diagnósticos precisos y tratamientos cómodos.'},
+  {i:'wallet', t:'Todos los medios de pago', d:'Tarjetas de crédito y débito, pagos sin contacto NFC, Yape y Plin.'},
+  {i:'building-2', t:'7 sedes en Lima', d:'Rímac, Miraflores, Independencia, Los Olivos, El Agustino y más.'},
+  {i:'award', t:'Más de 10 años de trayectoria', d:'Experiencia y confianza de miles de pacientes.'}
+];
+const wa = (msg) => WA + encodeURIComponent(msg);
+
+/* Render */
+document.getElementById('treatGrid').innerHTML = treatments.map(x=>`
+  <article class="reveal bg-white rounded-2xl p-6 border border-slate-100 shadow-sm flex flex-col">
+    <span class="w-12 h-12 rounded-xl bg-[#F0FDFA] text-brand grid place-items-center"><i data-lucide="${x.i}" class="w-6 h-6"></i></span>
+    <h3 class="mt-4 text-lg font-bold text-navy">${x.t}</h3>
+    <p class="mt-2 text-slate-600 text-sm flex-1">${x.d}</p>
+    <a href="${wa('Hola Clínica Dental Paradise (Sede Rímac), quisiera información sobre: '+x.k)}" target="_blank" rel="noopener" class="mt-5 w-full min-h-[48px] bg-wa/10 text-emerald-700 hover:bg-wa hover:text-white font-bold rounded-full inline-flex items-center justify-center gap-2 transition"><i data-lucide="message-circle" class="w-5 h-5"></i> Consultar por WhatsApp</a>
+  </article>`).join('');
+
+document.getElementById('whyGrid').innerHTML = why.map(x=>`
+  <div class="reveal flex gap-4 p-5 rounded-2xl bg-[#F8FAFC]">
+    <span class="shrink-0 w-11 h-11 rounded-xl bg-brand text-white grid place-items-center"><i data-lucide="${x.i}" class="w-5 h-5"></i></span>
+    <div><h3 class="font-bold text-navy">${x.t}</h3><p class="text-sm text-slate-600 mt-1">${x.d}</p></div>
+  </div>`).join('');
+
+document.getElementById('treatChips').innerHTML = chips.map((c,i)=>`
+  <label class="chip cursor-pointer"><input type="radio" name="trat" value="${c}" class="sr-only" ${i===0?'checked':''}><span class="inline-block min-h-[44px] px-4 py-2.5 rounded-full border border-slate-300 text-sm font-medium ${c.startsWith('Urgencia')?'text-red-600':''}">${c}</span></label>`).join('');
+
+const needGrid = document.getElementById('needGrid'), needRes = document.getElementById('needResult');
+needGrid.innerHTML = needs.map((n,idx)=>`
+  <button type="button" data-n="${idx}" class="need text-left min-h-[72px] p-4 rounded-2xl border-2 border-slate-200 bg-white flex items-center gap-3 transition">
+    <span class="shrink-0 w-11 h-11 rounded-xl bg-[#F0FDFA] text-brand grid place-items-center"><i data-lucide="${n.i}" class="w-6 h-6"></i></span>
+    <span class="font-bold text-navy">${n.t}</span>
+  </button>`).join('');
+needGrid.addEventListener('click', e=>{
+  const b = e.target.closest('.need'); if(!b) return;
+  const n = needs[+b.dataset.n];
+  needGrid.querySelectorAll('.need').forEach(x=>x.classList.toggle('active', x===b));
+  needRes.classList.remove('hidden');
+  needRes.innerHTML = `<p class="text-sm font-semibold text-brand-dark">Te recomendamos</p>
+    <h3 class="text-xl font-extrabold text-navy mt-1">${n.r}</h3>
+    <p class="text-slate-700 mt-2">${n.d}</p>
+    <p class="text-sm text-slate-600 mt-2"><strong>Duración aproximada de la cita:</strong> ${n.dur}</p>
+    <a href="${wa('Hola Clínica Dental Paradise (Sede Rímac), quisiera reservar una evaluación: '+n.r)}" target="_blank" rel="noopener" class="mt-4 w-full sm:w-auto min-h-[48px] px-6 bg-wa text-white font-bold rounded-full inline-flex items-center justify-center gap-2"><i data-lucide="message-circle" class="w-5 h-5"></i> Reservar esta evaluación</a>`;
+  lucide.createIcons();
+});
+
+/* Menú móvil */
+const drawer = document.getElementById('drawer'), menuBtn = document.getElementById('menuBtn');
+function toggleDrawer(open){
+  drawer.classList.toggle('hidden', !open);
+  menuBtn.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+menuBtn.addEventListener('click',()=>toggleDrawer(true));
+document.getElementById('closeBtn').addEventListener('click',()=>toggleDrawer(false));
+document.getElementById('drawerBg').addEventListener('click',()=>toggleDrawer(false));
+document.querySelectorAll('.drawer-link').forEach(a=>a.addEventListener('click',()=>toggleDrawer(false)));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') toggleDrawer(false); });
+
+/* Turno vs domingo */
+const dia = document.getElementById('dia'), turno = document.getElementById('turno'), note = document.getElementById('turnoNote');
+function checkSunday(){
+  const sunNight = dia.value==='Domingo' && turno.value.startsWith('Noche');
+  if(sunNight){ turno.selectedIndex = 1; }
+  note.classList.toggle('hidden', !sunNight);
+}
+dia.addEventListener('change',checkSunday); turno.addEventListener('change',checkSunday);
+
+/* Agendador */
+document.getElementById('sendWa').addEventListener('click',()=>{
+  const nombre = document.getElementById('nombre').value.trim();
+  const err = document.getElementById('nameErr');
+  if(!nombre){ err.classList.remove('hidden'); document.getElementById('nombre').focus(); return; }
+  err.classList.add('hidden');
+  checkSunday();
+  const trat = document.querySelector('input[name="trat"]:checked').value;
+  const msg = `Hola Clínica Dental Paradise, soy ${nombre}. Quisiera agendar una evaluación dental.\n\n• Tratamiento: ${trat}\n• Sede: ${document.getElementById('sede').value}\n• Día preferido: ${dia.value}\n• Turno: ${turno.value}\n\n¿Qué disponibilidad tienen? Gracias.`;
+  window.open(wa(msg), '_blank', 'noopener');
+});
+
+/* Estado en tiempo real (hora de Lima) */
+function updateStatus(){
+  const now = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));
+  const d = now.getDay(), h = now.getHours() + now.getMinutes()/60;
+  const close = d===0 ? 19 : 22, closeTxt = d===0 ? '7:00 p.m.' : '10:00 p.m.';
+  const dot = document.getElementById('statusDot'), txt = document.getElementById('statusText');
+  if(h>=8 && h<close){
+    dot.className='text-emerald-400'; txt.textContent = `Abierto ahora · Atendemos hoy hasta las ${closeTxt}`;
+  } else {
+    dot.className='text-amber-400';
+    txt.textContent = h<8 ? 'Cerrado ahora · Abrimos hoy a las 8:00 a.m.' : 'Cerrado ahora · Abrimos mañana a las 8:00 a.m.';
+  }
+}
+updateStatus(); setInterval(updateStatus, 60000);
+
+/* Imágenes con respaldo */
+function fixImg(img){
+  const box = document.createElement('div');
+  box.className = 'img-fallback';
+  box.setAttribute('role','img'); box.setAttribute('aria-label', img.alt);
+  box.innerHTML = '<i data-lucide="smile" style="width:72px;height:72px"></i>';
+  img.replaceWith(box); lucide.createIcons();
+}
+document.querySelectorAll('img').forEach(img=>{
+  img.addEventListener('error',()=>fixImg(img));
+  if(img.complete && img.naturalWidth===0) fixImg(img);
+});
+
+/* Revelado al scroll */
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+lucide.createIcons();
+</script>
+</body>
+</html>
